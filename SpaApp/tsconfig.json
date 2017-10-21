@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [ "es6", "dom" ],
+    "module": "commonjs",
+    "sourceMap": true,
+    "sourceRoot": "App",
+    "outDir": "wwwroot/app",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "./ClientApp/CustomTyping/*"
+      ]
+    }
+  },
+  "compileOnSave": false,
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ]
+}

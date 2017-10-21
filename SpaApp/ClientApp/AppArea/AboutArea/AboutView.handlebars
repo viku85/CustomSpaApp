@@ -1,0 +1,15 @@
+﻿<h2>{{Title}}</h2>
+<h3>{{Message}}</h3>
+
+<p>Use this area to provide additional information.</p>
+
+<div id="ContactViewHolder">
+</div>
+
+<script type="text/javascript">
+    var app = SpaApp.App;
+    app.SetConstant(app.AboutViewOption,
+        new app.AboutViewOption({
+            ContactContainerSelector: '#ContactViewHolder'
+        }));
+</script>
