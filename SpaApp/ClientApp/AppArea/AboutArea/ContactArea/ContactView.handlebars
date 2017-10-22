@@ -1,14 +1,109 @@
-﻿<h2>{{Title}}</h2>
+﻿<hr />
+<h2>{{Title}}</h2>
 <h3>{{Message}}</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="well well-sm">
+                <form id="ContactForm" method="post" action="/home/contact">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">
+                                    Name
+                                </label>
+                                <input type="text" class="form-control" id="Name" name="Name" placeholder="Enter name"
+                                       data-val="true"
+                                       data-val-length="The Name must be of 2 to 150 characters."
+                                       data-val-length-max="150" data-val-length-min="2"
+                                       data-val-required="Name is required."
+                                       value="VK" />
+                                <div class="field-validation-error"
+                                     data-valmsg-for="Name" data-valmsg-replace="true" id="NameError">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">
+                                    Email Address
+                                </label>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-envelope"></span>
+                                        </span>
+                                        <input type="text" class="form-control" id="Email" placeholder="Enter email"
+                                               name="Email"
+                                               data-val="true"
+                                               data-val-required="Email is required."
+                                               data-val-regex="Invaild email id."
+                                               data-val-regex-pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
+                                               value="viku85@gmail.com" />
+                                    </div>
+                                    <div class="field-validation-error"
+                                         data-valmsg-for="Email" data-valmsg-replace="true" id="EmailError">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject">
+                                        Subject
+                                    </label>
+                                    <select id="Subject" name="Subject" class="form-control" required="required">
+                                        <option value="service">General</option>
+                                        <option value="suggestions">Suggestions</option>
+                                        <option value="product">Product Support</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">
+                                    Message
+                                </label>
+                                <textarea name="Message" id="Message" class="form-control" rows="9" cols="25" required="required"
+                                          placeholder="Message"
+                                          data-val="true"
+                                          data-val-length="The Partner Name must be of 10 to 2000 characters."
+                                          data-val-length-max="2000" data-val-length-min="10"
+                                          data-val-required="Message is required.">All is well.</textarea>
+                                <div class="field-validation-error"
+                                     data-valmsg-for="Message" data-valmsg-replace="true" id="MessageError">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary pull-right" id="ContactUsSubmit">
+                                    Send Message
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4">
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+            <legend><span class="glyphicon glyphicon-globe"></span> Our office</legend>
+            <address>
+                One Microsoft Way<br />
+                Redmond, WA 98052-6399<br />
+                <abbr title="Phone">P:</abbr>
+                425.555.0100
+            </address>
+
+            <address>
+                <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
+                <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+            </address>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var app = SpaApp.App;
+    app.SetConstant(app.ContactViewOption,
+        new app.ContactViewOption({
+            FormSelector: '#ContactForm',
+            SubmitButtonSelector: '#ContactUsSubmit'
+        }));
+    app.GetObject(app.ContactForm);
+</script>

@@ -4,6 +4,7 @@ import { HttpRequestResponse, JqueryEventHelper, Form } from './../Component/Ind
 import { HomeController } from './../AppArea/HomeArea/HomeController';
 import { AboutController } from './../AppArea/AboutArea/AboutController';
 import { ContactController } from './../AppArea/AboutArea/ContactArea/ContactController';
+import { ContactForm } from './../AppArea/AboutArea/ContactArea/ContactForm';
 
 import { BaseController } from './../Base/BaseController';
 
@@ -20,6 +21,7 @@ container.bind<HomeController>(HomeController).toSelf();
 
 container.bind<AboutController>(AboutController).toSelf();
 container.bind<ContactController>(ContactController).toSelf();
+container.bind<ContactForm>(ContactForm).toSelf();
 
 function GetObject<T>(service: any): T {
     return IsAlreadyInitilized(service) ? <T>container.get(service) : null;

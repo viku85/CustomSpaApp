@@ -2,7 +2,7 @@
 
 @injectable()
 class Form {
-    constructor(readonly Notifier: Notification) {
+    constructor() {
     }
     SubmitForm(option: AjaxFormPostContent) {
         var form: JQuery;

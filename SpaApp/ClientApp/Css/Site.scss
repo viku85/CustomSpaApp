@@ -1,4 +1,6 @@
-﻿$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+﻿/// <reference path="../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables" />
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+
 @import 'bootstrap-sass/assets/stylesheets/bootstrap';
 
 body {
@@ -6,6 +8,9 @@ body {
     padding-bottom: 20px;
 }
 
+.field-validation-error {
+    color: $brand-danger;
+}
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
