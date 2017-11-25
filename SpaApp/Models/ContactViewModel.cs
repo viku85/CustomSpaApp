@@ -9,7 +9,6 @@ namespace SpaApp.Models
 {
     public class ContactViewModel
     {
-        [MinLength(3)]
         public string Name { get; set; }
 
         public string Email { get; set; }

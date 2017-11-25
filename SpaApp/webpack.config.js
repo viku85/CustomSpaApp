@@ -78,14 +78,6 @@ module.exports = {
         ]
     },
     plugins: [
-        //new webpack.ProvidePlugin({
-        //    $: "jquery",
-        //    jQuery: "jquery",
-        //    "window.jQuery": "jquery"
-        //}),
-        //new webpack.HotModuleReplacementPlugin(),
-        //new webpack.NoEmitOnErrorsPlugin(),
-        //new webpack.NamedModulesPlugin(),
         new ExtractTextPlugin('style.css'),
         new webpack.LoaderOptionsPlugin({
             debug: true,

@@ -1,6 +1,6 @@
 ﻿import { Container, interfaces } from 'inversify';
 
-import { HttpRequestResponse, JqueryEventHelper, Form } from './../Component/IndexInternal';
+import { HttpRequestResponse, JqueryEventHelper, Form, FormValidation } from './../Component/IndexInternal';
 import { HomeController } from './../AppArea/HomeArea/HomeController';
 import { AboutController } from './../AppArea/AboutArea/AboutController';
 import { ContactController } from './../AppArea/AboutArea/ContactArea/ContactController';
@@ -15,6 +15,7 @@ container.bind<HttpRequestResponse>(HttpRequestResponse).toSelf().inSingletonSco
 container.bind<JqueryEventHelper>(JqueryEventHelper).toSelf().inSingletonScope();
 container.bind<Notification>(Notification).toSelf().inSingletonScope();
 container.bind<Form>(Form).toSelf().inSingletonScope();
+container.bind<FormValidation>(FormValidation).toSelf().inSingletonScope();
 
 // Controllers
 container.bind<HomeController>(HomeController).toSelf();

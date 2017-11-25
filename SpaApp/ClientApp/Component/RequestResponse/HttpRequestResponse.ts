@@ -9,7 +9,7 @@ class HttpRequestResponse {
         return this.rootUrl;
     }
 
-    GetGemsUrl(...relativeUrl: string[]): string {
+    GetAppUrl(...relativeUrl: string[]): string {
         // TODO: Could be joined with any base URL for the entire application.
         return `${relativeUrl.join('/')}`
     }
@@ -23,7 +23,7 @@ class HttpRequestResponse {
 
     private Ajax(option: AjaxRequest, ajaxRequestType: string = "POST") {
         $.ajax({
-            url: this.GetGemsUrl(option.Url),
+            url: this.GetAppUrl(option.Url),
             type: ajaxRequestType,
             cache: false,
             data: option.DataToPost,

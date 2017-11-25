@@ -16,12 +16,8 @@ namespace SpaApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Contact([FromBody] ContactViewModel model)
+        public IActionResult AddContact([FromBody] ContactViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             return Ok(model);
         }
     }

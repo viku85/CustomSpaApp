@@ -1,8 +1,11 @@
 ﻿import { injectable } from "inversify";
-
+import { HttpRequestResponse } from './../RequestResponse/HttpRequestResponse';
+import { FormValidation } from './FormValidation';
 @injectable()
 class Form {
-    constructor() {
+    constructor(
+        readonly Http: HttpRequestResponse,
+        readonly Validation: FormValidation) {
     }
     SubmitForm(option: AjaxFormPostContent) {
         var form: JQuery;
@@ -51,12 +54,16 @@ class Form {
             .map((key) => { serializedData[key.name] = key.value; });
 
         if (option.SerializeData != undefined) {
-            option.SerializeData(serializedData);
+            var newData = option.SerializeData(serializedData);
+            if (newData != undefined) {
+                serializedData = newData;
+            }
         }
         var formProgress = (state: boolean) => {
             // TODO: Add progess status for form.
         };
-        if ($(triggeredForm).valid()) {
+        var validator = form.validate();
+        if ($(triggeredForm).validate().form()) {
             formProgress(true);
             $.ajax({
                 url: $(triggeredForm).attr('action'),
@@ -64,6 +71,7 @@ class Form {
                 contentType: 'application/json',
                 method: 'post',
                 success: (data) => {
+                    validator.resetForm();
                     if (data != undefined && data != '') {
                         if (option.OnPostSuccess != undefined) {
                             option.OnPostSuccess(data);
@@ -83,18 +91,13 @@ class Form {
                             option.OnValidationFailure(data.responseJSON);
                         }
                         if (option.OnValidationFailureMessageHandling == undefined) {
-                            var message = '';
-                            var propStrings = Object.keys(data.responseJSON);
-                            $.each(propStrings, (errIndex, propString) => {
-                                var propErrors = data.responseJSON[propString];
-                                $.each(propErrors, (errMsgIndex, propError) => {
-                                    message += propError;
+                            this.Validation.ParseModelStateError(data,
+                                (message, propName) => {
+                                    var err = {};
+                                    err[propName] = message;
+                                    (<any>validator).invalid[propName] = true;
+                                    validator.showErrors(err);
                                 });
-                                message += '\n';
-                                $(`#${propString}Error`).html(message)
-                                    .removeClass('field-validation-valid').addClass('field-validation-error');
-                                message = '';
-                            });
                         }
                         else {
                             option.OnValidationFailureMessageHandling(data.responseJSON);
@@ -127,7 +130,7 @@ interface AjaxFormPostContent {
         ButtonEvent?: JQuery.Event<HTMLElement, null>,
         FormSubmitEvent?: JQuery.Event<HTMLElement, null>,
     },
-    SerializeData?: (data) => void;
+    SerializeData?: (data) => any;
     OnPostSuccess?: (data: string) => void;
     OnFailure?: () => void;
     OnPostSuccessResult?: (data: any) => void;
